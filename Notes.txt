@@ -1,0 +1,4 @@
+What is React?
+    - JavaScript library used to create websites
+    - Allows us to easily create Single Page Apps - SPA
+    
