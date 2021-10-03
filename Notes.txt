@@ -1,4 +1,59 @@
 What is React?
     - JavaScript library used to create websites
     - Allows us to easily create Single Page Apps - SPA
-    
+
+*** npx create-react-app <project-name> => this will create the react app for us with all the required files. 
+
+Brief details on the files that are there on the react app:-
+1. node_modules - all the project dependencies are here
+2. public - all content that are public to the browser will be here
+3. src - almost all codes, ie react component comes here
+4. package-json : 
+        - dependencies: lists all dependencies that are needed for the application
+        - scripts: preview application in browser, local server
+
+
+******************* REACT COMPONENTS *************************
+ 
+1. the function App() can be an arrow function but the function name should be in Upper Case. The function returns
+    whatever that is required to be put on that component
+2. JSX - Syntax similar to HTML. Allows us to easily create HTML style template and in the backside a compiler called Babel
+    converts all this JSX template into HTML and renders the HTML to DOM
+    In JSX we can't use class because class is a reserved keyword in JavaScript so we use className and when it is converted to HTML it becomes class
+3. In the bottom of the react component(ie App here) we use export to export it to other files
+
+{/* <h1>{title}</h1> */}
+        {/* <p>Liked {likes} times</p>
+        <p>{10}</p>
+        <p>{"hello, all"}</p>
+        <p>{[1, 2, 3, 4, 5]}</p>
+        <p>{Math.round(Math.random() * 10)}</p>
+
+        <a href={link}>Google Site</a> */}
+
+
+****************** DYNAMIC VALUES IN TEMPLATES **********************
+
+1. any valid javascript commands can be written in the function before the return statement
+2. To include any javascript value inside JSX enclose it between curly braces {JavaScript ELement}
+3. Variable of any type be it integer, array, decimal etc will be converted to string in browser but object and boolean won't
+    be converted and an error would arise
+4. Anything that comes inside {} inside the JSX will be treated as a JavaScript block
+
+
+****************** MULTIPLE COMPONENTS ******************************
+
+1. App component will be the first one on the browser followed by the other components - Root component
+2. sfc - stateless functional component
+
+
+****************** ADDING STYLES ************************************
+
+1. inline styling in JSX -> style={{}}
+    - the first {} tells that it is dynmaic value
+    - second {} is for denoting tha it is an object
+    - the property in the second {} cannot be things like border-radius, background-color it has to be backgroundColor, borderRadius 
+        because it is a Javascript code
+
+***************** CLICK EVENT & FUNCTIONS ***************************
+
