@@ -56,4 +56,120 @@ Brief details on the files that are there on the react app:-
         because it is a Javascript code
 
 ***************** CLICK EVENT & FUNCTIONS ***************************
+ 
+1. <button onClick = {}> : here we give the function reference inside the {} and not invoke the function (ie functionName())
+    - when we want to pass in a parameter we can't give functionName(parameter) cause this is again invoking the function directly
+        instead we have to wrap it in an anonymous function
+    Ex: <button onClick={() => clickMeAgain("Benson")}>Click Again</button>
 
+**************** USING STATE ****************************************
+
+1. State - Data being used in that component at that point of time
+2. When we give value to a variable and try to change it from a function we won't be able to see the change on the 
+    webpage but it is actually being changed on the console because the variable is not reactive because there is no re-rendering to the
+    page when the value of the variable is changed
+    *** to do the above in react we use hook(useState)
+    1. import {useState} from react
+    2. change the variable you wanted to be reactive in useState format
+        ie, const [name,setName] = useState(value);
+            a. name - this will be variable that will hold the value
+            b. setName - it is the function which will be used to change the value of the variable
+            So whenever we use the fucntion to change the value it triggers the react to re-render the page and the change will be applied
+
+    Ex: const [name, setName] = useState("Benson");
+        const clickMe = () => {
+            setName("Mr. Benson ");
+        };
+
+**************** OUTPUTTING LISTS ***************************
+
+1. To iterate over a list of arrays of objects we use map in Javascript
+    - we must include the key in each element of the list or browser may not be able to distinguish between each element of the list
+    - key should be the unique id so that it can be distinguished
+
+
+****************** PROPS & REUSABLE COMPONENTS *********************
+
+1. When we want to reuse a particular block of code or logic in multiple components or pages
+    - benefit of doing this is we can pass multiple data to the component so we can minimise the repitition of the code
+    - these data can be passed in the form of props which makes the component more reusable
+
+2. <BlogList blogs={blogs} /> Here we pass blogs to the Bloglist which will be taken as props argument in the BlogList function
+    props is an object and to access blogs we have to use props.blogs
+    blogs = {blogs} : Here the first blogs is the property name and the {blogs} is the value we are passing to BlogList
+    - destructuring the props using {blog,title} rather than using separately
+
+
+****************** FUNCTION AS PROPS ******************************
+
+1. When we give each blog a delete button but when we want to delete a particular blog we need to create the function In
+    the home.js file and from there pass this function as props because the data is not present in this component
+
+
+****************** useEffect HOOK *********************************
+
+-> useEffect -  runs code on every render ie any time data renders or changes the function inside useEffect triggers
+-> Dependencies of useEffect
+    - when we don't want the useEffect to run for every render we can use useEffect dependency ie by giving a second parameter
+    Ex: useEffect(function,[]) - when we use and empty block the useEffect will be triggered only for the first time after initialization
+    useEffect(function,[useStateVariable]) -  when we have multiple useState variables and we want to use useEffect on some of them we assign those inside the square braces
+
+
+******************* USING JSON SERVER *****************************
+
+    We know that when we use useEffect when component is rendered initially which is where we can fetch some data, so instead of using
+    data from database we will use from json server where we will use a fake rest API
+    
+    npx json-server --watch data/db.json --port 8000 
+
+    Type the above line in a separate terminal and this will enable to system to watch ove the particular file mentioned in the mentioned port
+    We can see the end resource after the above command is executed where we can acces the data of json file
+
+    /blogs          GET         Fetch all blogs
+    /blogs/{id}     GET         Fetch a single blog
+    /blogs          POST        Add a new blog
+    /blogs/{id}     delete      Delete a blog
+
+    to collect the data from the json file we will use fetch and it is an async command
+
+    A problem that could arise is as we set the initial value of blogs to be null and when we are rendering data from json file to the browser there 
+    is a small delay from null to the value of json file and this could arise an error
+    
+    To avoid this we give logical and (&&) which makes sure that the data is loaded and only then is rendered
+    Ex: {blogs && (<BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/> )}
+    Here && checks if blogs is not null and if it not then only goes to the second part
+
+
+*************************** CATCHING ERRORS ***************************
+
+    When there is some network issue or when we can't even fetch the content then we will give a catch block
+    with the err argument which will tell the detail of the error - connection error
+
+    When request is denied or end point doesn't exist ie when response is made by the server and when there is no data
+    in the response
+
+*************************** CREATING CUSTOM HOOK **********************
+
+    custom hooks function name has to start with "use" or it doesn't work
+
+*************************** REACT ROUTER ******************************
+
+    Non-React websites:
+    When we want to navigate between different pages we send a request to the server which then sends the html file as a response and that
+    will be displayed on browser
+
+    React websites:
+    They start the same way ie when we want to navigate we send a request to the server and the server send back the html file along with a bundled js file
+    The html file will be initially empty and the js file will put value into the html file dynamically
+    After this when we click on any component on the page the react file will act as the router and it does not go to the server
+
+    we have to install react-router separately as it is not a part of the core package
+    ** npm install react-router-dom@5 "@5 is the version"
+
+    To have the entire App component access to the router we surround the app component inside <Router></Router>
+
+    <Switch>
+        <Route path="path to the content">
+            content to be shown
+        </Route>
+    </Switch>
