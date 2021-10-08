@@ -173,3 +173,42 @@ Brief details on the files that are there on the react app:-
             content to be shown
         </Route>
     </Switch>
+
+    *** ROUTE PARAMETERS
+    Switch - It is used to wrap the route components and it makes sure that only one route component is shown in browser
+    Route components have a top-to-bottom approach
+        Ex: <Route path="/">
+            <Route path="/create">
+            Here both will point to "/" because react follows a concept of "includes" and it sees the "/" matching in both path and delivers
+            the first route. To avoid this we use the parameter exact which means the path has to be exactly same
+    If switch component is not there then all the pages will be rendered
+
+    *** ROUTE LINKS
+    Even though we are using the route components to navigate between different pages we are still sending request to
+    server 
+    We want the react route to grab request and do the required content changes and for this we will be using a link tag rather than anchor tag
+    import {Link} from 'react-router-dom';
+
+    When we click between the navigation suddenly back-to-back an error will arise telling "Can't perform a React state update on an unmounted
+    component" this is because we have the custom fetch hook which is still running in the background
+    When we try to quickly navigate between multiple react components and when we use some hook which has to load the data and when we try to go to the next component
+    without waiting for this to load an error will arise. So we have to do something to prevent the fetch to load when we move on to the next ccmponent or page
+
+    **We can solve this by using a cleanup in the custom hook with  abort controller
+    Then we have to assosciate the abort controller to the fetch/custom hook
+    Ex: const abortCont = new AbortController();
+        fetch(url,{signal:abortCont.signal})
+
+    *** Route Parameters
+
+    /blogs/123
+    /blogs/456
+    /blogs/789
+
+    these are the route parameters coz we need to access each blog based on id
+    so create a BlogDetails component
+    <Route path="/blogs/:id"> -> We can't hardcode the id here so to write it dynamically we use ":" followed by the variable name
+
+    const {id} = useParams() -> this will help in fetching the parameter from the path written
+    Ex: http://localhost:3000/blogs/3 here id will store the value 3
+    
