@@ -212,3 +212,54 @@ Brief details on the files that are there on the react app:-
     const {id} = useParams() -> this will help in fetching the parameter from the path written
     Ex: http://localhost:3000/blogs/3 here id will store the value 3
     
+
+***************************** CONTROLLED INPUTS ************************
+
+    We will use useState so that whenever there is a change in the input field we will keep using setMethod()
+    Using useState helps to keep a track of the value
+    
+    onChange={(e) => setTitle(e.target.value)}
+        - onChange will trigger every time when there is a change made to the input field
+        - e is the event object and every time there is a change we modify the input field by using setTitle
+        - e.target.value => this gives the value that is being written on the target input field
+
+    we attach onSubmit parameter to the form and when the form is submitted the onSubmit fires a function and inside that function
+    we will attach the necessary things
+    e.preventDefault() => this prevents from resetting the input fields after a submit is made
+
+    in a form when a button is fired it is attached to the form itself and the event can be recieved from the form and we needn't do a 
+    separate onClick on the button
+
+    ** Using Fetch API
+    fetch("http://localhost:8000/blogs/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blog),
+    }).then(() => {
+      console.log("new blog added");
+      setIsPending(false);
+    });
+        - first parameter is the end point to which we want to connection
+        - second is an object that provides detail about the connection
+            - method: the action we are doing ie GET, POST etc
+            - headers: detail of the data that is going to be setName
+            - body: the data we have to send since we are sending the data in json format we have to use JSON.stringify to convert the blogs
+                    object to json format
+    
+
+********************** PROGRAMMED REDIRECTS **************************
+
+    A hook that will be used for this is useHistory
+
+    const history = useHistory() => this way we are making the useHistory object
+
+    history.go(-1) => go back in history by 1 and to go in future you have to give positive values in go()
+
+    history.push("path") => goes to the path mentioned after a certain condition has taken place
+
+    When we type a wrong path or that something that doesn't exist we have to show a 404 page or a page telling the path doesn't exist
+    for this we have to give path="*" in the routes in App.js where if the given path doesn't match any of the above routes
+    the the page under this route ie <Route path ="*"> <NotFound /> </Route> here if the path mentioned is not valid then the NotFound page will
+    be displayed
+
+    
